@@ -18,16 +18,12 @@ public class Player {
     }
 
     public void makeBet(int amount) {
-        int activeStack = stack;
-        int activeBet = inHandBet;
-        String activeName = name;
-        if (amount > activeStack) {
+        if (amount > stack) {
             System.out.println("Invalid bet, insufficient chips in stack.");
         } else {
-            activeStack = activeStack - amount;
-            activeBet = activeBet + amount;
-            System.out.println(activeName + " put in " + activeBet + " chips. They have " + activeStack + " chips left in their stack.");
-            inHandBet = activeBet;            
+            stack = stack - amount;
+            inHandBet = inHandBet + amount;
+            System.out.println(name + " put in " + inHandBet + " chips. They have " + stack + " chips left in their stack.");     
         }
 
 

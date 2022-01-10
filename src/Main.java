@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
+        int pot;
         CardsDeck Deck = new CardsDeck();
         int numberOfPlayers = 0;
         ArrayList<Player> Players = new ArrayList<>();
@@ -32,26 +33,27 @@ public class Main {
         int gameOn = 1;
 
         while(gameOn == 1) {
+            Board.clear();
             Deck.reset();
-            int pot = 0;
-            Betting.Round(Players, pot, Board);
+            pot = 0;
+            pot = Betting.Round(Players, pot, Board);
             Board.add(Deck.pullRandom());
             Board.add(Deck.pullRandom());
             Board.add(Deck.pullRandom());
             Spacer.SpaceText(4);
             System.out.println("Dealing the Flop");
             Spacer.SpaceText(4);
-            Betting.Round(Players, pot, Board);
+            pot = Betting.Round(Players, pot, Board);
             Board.add(Deck.pullRandom());
             Spacer.SpaceText(4);            
             System.out.println("Dealing the Turn");
             Spacer.SpaceText(4);
-            Betting.Round(Players, pot, Board);
+            pot = Betting.Round(Players, pot, Board);
             Board.add(Deck.pullRandom());
             Spacer.SpaceText(4);
             System.out.println("Dealing the River");
             Spacer.SpaceText(4);
-            Betting.Round(Players, pot, Board);
+            pot = Betting.Round(Players, pot, Board);
 
 
             playerCheck(Players);

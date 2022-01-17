@@ -7,10 +7,10 @@ public class Main {
     public static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         int pot;
-        CardsDeck Deck = new CardsDeck();
+        CardsDeck deck = new CardsDeck();
         int numberOfPlayers = 0;
-        ArrayList<Player> Players = new ArrayList<>();
-        ArrayList<CardsDeck.Card> Board = new ArrayList<>();
+        ArrayList<Player> players = new ArrayList<>();
+        ArrayList<CardsDeck.Card> board = new ArrayList<>();
 
         System.out.print("Please Enter the Number of Players:");
         numberOfPlayers = sc.nextInt();
@@ -21,10 +21,10 @@ public class Main {
             String pName = sc.next();
             System.out.print("Please enter a starting stack for Player " + playerNumber + ":");
             int pStack =sc.nextInt();
-            CardsDeck.Card pCardOne = Deck.pullRandom();
-            CardsDeck.Card pCardTwo = Deck.pullRandom();
+            CardsDeck.Card pCardOne = deck.pullRandom();
+            CardsDeck.Card pCardTwo = deck.pullRandom();
             Player newPlayer = new Player(pName, pStack, pCardOne, pCardTwo);
-            Players.add(newPlayer);
+            players.add(newPlayer);
             Spacer.SpaceText(4);           
         }
         
@@ -33,31 +33,32 @@ public class Main {
         int gameOn = 1;
 
         while(gameOn == 1) {
-            Board.clear();
-            Deck.reset();
+            board.clear();
+            deck.reset();
+            Betting.resetPlayers(players);
             pot = 0;
-            pot = Betting.Round(Players, pot, Board);
-            Board.add(Deck.pullRandom());
-            Board.add(Deck.pullRandom());
-            Board.add(Deck.pullRandom());
+            pot = Betting.round(players, pot, board);
+            board.add(deck.pullRandom());
+            board.add(deck.pullRandom());
+            board.add(deck.pullRandom());
             Spacer.SpaceText(4);
-            System.out.println("Dealing the Flop");
+            System.out.println("Dealing the Flop:" + board);
             Spacer.SpaceText(4);
-            pot = Betting.Round(Players, pot, Board);
-            Board.add(Deck.pullRandom());
+            pot = Betting.round(players, pot, board);
+            board.add(deck.pullRandom());
             Spacer.SpaceText(4);            
-            System.out.println("Dealing the Turn");
+            System.out.println("Dealing the Turn: " + board);
             Spacer.SpaceText(4);
-            pot = Betting.Round(Players, pot, Board);
-            Board.add(Deck.pullRandom());
+            pot = Betting.round(players, pot, board);
+            board.add(deck.pullRandom());
             Spacer.SpaceText(4);
-            System.out.println("Dealing the River");
+            System.out.println("Dealing the River: " + board);
             Spacer.SpaceText(4);
-            pot = Betting.Round(Players, pot, Board);
+            pot = Betting.round(players, pot, board);
 
 
-            playerCheck(Players);
-            Collections.rotate(Players, -1);
+            playerCheck(players);
+            Collections.rotate(players, -1);
             
 
             System.out.print("Continue game? (1):");
